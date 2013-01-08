@@ -1,74 +1,283 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>iosOverlay.js</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/iosOverlay.css">
+  <link rel="stylesheet" href="css/prettify.css">
+  <script src="js/modernizr-2.0.6.min.js"></script>
+</head>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Ios-overlay : " />
+<body>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  <div class="container">
 
-    <title>Ios-overlay</title>
-  </head>
+    <h1>
+      iosOverlay.js
+      <small>&mdash; iOS-style overlays/notifications for the web</small>
+      <iframe style="border: 0; margin: 0; padding: 0;"
+        src="https://www.gittip.com/taitems/widget.html"
+        width="48pt" height="22pt"></iframe>
+    </h1>
 
-  <body>
+    <hr>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/taitems/iOS-Overlay">View on GitHub</a>
+    <h2>Examples</h2>
 
-          <h1 id="project_title">Ios-overlay</h1>
-          <h2 id="project_tagline"></h2>
+    <p>
+      The following all have a two second duration:
+    </p>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/taitems/iOS-Overlay/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/taitems/iOS-Overlay/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+    <p class="container">
+      <button id="loading" class="btn">Loading Spinner</button>
+      <button id="checkMark" class="btn">Success</button>
+      <button id="cross" class="btn">Error</button>
+    </p>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
+    <p class="spacer">&nbsp;</p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+    <p>
+      It's possible to update a notification when it's already been added:
+    </p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+    <p class="container">
+      <button id="loadToSuccess" class="btn">Loading Then Success</button>
+    </p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+    <h2>Parameters and Defaults</h2>
 
-<h3>Designer Templates</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Parameter
+          </th>
+          <th>
+            Default Value
+          </th>
+          <th>
+            Accepts Type
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <code>onbeforeshow</code>
+          </td>
+          <td>
+            <code>noop();</code>
+          </td>
+          <td>
+            Function
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>onshow</code>
+          </td>
+          <td>
+            <code>noop();</code>
+          </td>
+          <td>
+            Function
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>onbeforehide</code>
+          </td>
+          <td>
+            <code>noop();</code>
+          </td>
+          <td>
+            Function
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>onhide</code>
+          </td>
+          <td>
+            <code>noop();</code>
+          </td>
+          <td>
+            Function
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>text</code>
+          </td>
+          <td>
+            null
+          </td>
+          <td>
+            String
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>icon</code>
+          </td>
+          <td>
+            null
+          </td>
+          <td>
+            String (file path)
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>spinner</code>
+          </td>
+          <td>
+            null
+          </td>
+          <td>
+            Spinner (via <a href="http://fgnass.github.com/spin.js/">Spin.js</a>)
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>duration</code>
+          </td>
+          <td>
+            null
+          </td>
+          <td>
+            Number (ms)
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+    <h2>Methods</h2>
 
-<h3>Rather Drive Stick?</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Method
+          </th>
+          <th>
+            Description/Use
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <code>hide</code>
+          </td>
+          <td>
+            Call this to begin the hide animation.
+<pre class="prettyprint">
+  // notification is called
+  var notification = ...;
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+  // something happens
 
-<h3>Authors and Contributors</h3>
+  // fade out notification and destroy on complete
+  notification.hide();
+</pre>
+          </td>
+        </tr>
+        <tr>
+        <tr>
+          <td>
+            <code>update</code>
+          </td>
+          <td>
+            Used to update the contents of a notification on the fly. Accepts <code>text</code> and <code>icon</code> in formats as table above denotes. Accepts one or both.
+<pre class="prettyprint">
+  // notification is called
+  var notification = ...;
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+  // something happens
 
-<h3>Support or Contact</h3>
+  // notification is updated
+  notification.update({
+    text: "Success!",
+    icon: "img/smiley.png"
+  });
+</pre>
+          </td>
+        </tr>
+        <tr>
+      </tbody>
+    </table>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
+    <h2>Browser Support</h2>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Ios-overlay maintained by <a href="https://github.com/taitems">taitems</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+    <ul>
+      <li><strong>IE7+</strong> &mdash; Rounded corners/animation do degrade when not supported, see optional dependencies</li>
+      <li><strong>Google Chrome</strong></li>
+      <li><strong>Firefox</strong></li>
+      <li><strong>Opera</strong></li>
+      <li><strong>Desktop Safari</strong></li>
+      <li><strong>Mobile Safari</strong> &mdash; iPhone &amp; iPad</li>
+    </ul>
 
-    
+    <h2>Optional Dependencies</h2>
 
-  </body>
+    <ul>
+      <li><a href="#">Spin.js</a> &mdash; Required if you want to use a spinner object.</li>
+      <li><a href="#">jQuery</a> &mdash; Required for a fallback CSS animation support.</li>
+    </ul>
+
+    <h2>Tips &amp; Tricks</h2>
+
+    <ul>
+      <li>To prevent icon flickers as they load, preload image resources.</li>
+      <li>Keep <code>text</code> messages short and succinct.</li>
+      <li>You might also like these iOS 3D dropdown notifications: <br><br>
+          <a href="http://taitems.github.com/UX-Lab/iOSNotification/index.html" target="_blank">
+            <img src="img/promo.jpg">
+          </a>
+      </li>
+    </ul>
+
+  </div>
+
+  <footer class="container">
+
+    <p><small>
+      Check and Cross icons come from the <a href="http://thenounproject.com">The Noun Project</a>, attributed under CC 3.0.
+    </small></p>
+
+    <iframe style="border: 0; margin: 0; padding: 0;"
+      src="https://www.gittip.com/taitems/widget.html"
+      width="48pt" height="22pt"></iframe>
+
+  </footer>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/iosOverlay.js"></script>
+  <script src="js/spin.min.js"></script>
+  <script src="js/prettify.js"></script>
+  <script src="js/custom.js"></script>
+  <script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37502505-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  
+</body>
 </html>

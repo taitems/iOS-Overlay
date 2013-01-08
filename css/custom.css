@@ -1,0 +1,33 @@
+body > div.container {
+  padding: 50px 0;
+  position: relative;
+}
+div.container iframe {
+	position: absolute;
+	top: 55px;
+	right: 0;
+}
+h2 {
+	margin-top: 40px;
+	font-size: 14px;
+	text-transform: uppercase;
+}
+p.spacer {
+	height: 5px;
+	overflow: hidden;
+}
+footer {
+	padding: 20px 0;
+  	position: relative;
+}
+footer iframe {
+	position: absolute;
+	top: 20px;
+	right: 0;
+}
+table td:first-child {
+	width: 125px;
+}
+li strong {
+	color: #111;
+}
