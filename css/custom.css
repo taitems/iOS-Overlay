@@ -31,3 +31,7 @@ table td:first-child {
 li strong {
 	color: #111;
 }
+.btn.btn-large {
+	float: right;
+	margin-top: 40px;
+}
