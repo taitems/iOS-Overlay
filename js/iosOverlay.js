@@ -16,7 +16,8 @@ var iosOverlay = function(params) {
 		icon: null,
 		spinner: null,
 		duration: null,
-		id: null
+		id: null,
+		parentEl: null
 	};
 
 	// helper - merge two objects together, without using $.extend
@@ -75,7 +76,11 @@ var iosOverlay = function(params) {
 			overlayDOM.addEventListener("oAnimationEnd", handleAnim, false);
 			overlayDOM.addEventListener("animationend", handleAnim, false);
 		}
-		document.body.appendChild(overlayDOM);
+		if (params.parentEl) {
+			document.getElementById(params.parentEl).appendChild(overlayDOM);
+		} else {
+			document.body.appendChild(overlayDOM);
+		}
 		
 		settings.onbeforeshow();
 		// begin fade in
