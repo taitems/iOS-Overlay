@@ -121,7 +121,11 @@ var iosOverlay = function(params) {
 	};
 
 	var destroy = function() {
-		document.body.removeChild(overlayDOM);
+		if (params.parentEl) {
+			document.getElementById(params.parentEl).removeChild(overlayDOM);
+		} else {
+			document.body.removeChild(overlayDOM);
+		}
 	};
 
 	var update = function(params) {
