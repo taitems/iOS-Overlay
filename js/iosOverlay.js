@@ -134,12 +134,9 @@ var iosOverlay = function(params) {
 		}
 		if (params.icon) {
 			if (settings.spinner) {
-				// It is possible for the spinner to be already removed, so
-				// ignore the exception
-				try {
-					settings.spinner.el.parentNode.removeChild(settings.spinner.el);
-				}
-				catch (e) {}
+				// Unless we set spinner to null, this will throw on the second update
+				settings.spinner.el.parentNode.removeChild(settings.spinner.el);
+				settings.spinner = null;
 			}
 			overlayDOM.innerHTML += '<img src="' + params.icon + '">';
 		}
