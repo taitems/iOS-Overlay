@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "homepage": "https://github.com/izifortune/iOS-Overlay",
   "authors": [
-    "Tait Brown <tbrown@gmail.com>",
-    "Fabrizio Fortunato <fortune@cortesconta.net>"
+    "Tait Brown <taitbrown@gmail.com>",
   ],
   "description": "iOS Overlay/Notification Plugin for the Web!",
   "main": "js/iosOverlay.js",
