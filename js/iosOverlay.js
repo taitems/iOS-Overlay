@@ -1,9 +1,9 @@
 /*global $*/
 /*jshint unused:false,forin:false*/
+'use strict';
 
 var iosOverlay = function(params) {
 
-	"use strict";
 
 	var overlayDOM;
 	var noop = function() {};
@@ -21,10 +21,14 @@ var iosOverlay = function(params) {
 	};
 
 	// helper - merge two objects together, without using $.extend
-	var merge = function (obj1, obj2) {
+	var merge = function(obj1, obj2) {
 		var obj3 = {};
-		for (var attrOne in obj1) { obj3[attrOne] = obj1[attrOne]; }
-		for (var attrTwo in obj2) { obj3[attrTwo] = obj2[attrTwo]; }
+		for (var attrOne in obj1) {
+			obj3[attrOne] = obj1[attrOne];
+		}
+		for (var attrTwo in obj2) {
+			obj3[attrTwo] = obj2[attrTwo];
+		}
 		return obj3;
 	};
 
@@ -33,21 +37,25 @@ var iosOverlay = function(params) {
 		var b = document.body || document.documentElement;
 		var s = b.style;
 		var p = 'transition';
-		if (typeof s[p] === 'string') { return true; }
+		if (typeof s[p] === 'string') {
+			return true;
+		}
 
 		// Tests for vendor specific prop
 		var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
 		p = p.charAt(0).toUpperCase() + p.substr(1);
-		for(var i=0; i<v.length; i++) {
-			if (typeof s[v[i] + p] === 'string') { return true; }
+		for (var i = 0; i < v.length; i++) {
+			if (typeof s[v[i] + p] === 'string') {
+				return true;
+			}
 		}
 		return false;
 	}());
 
 	// setup overlay settings
-	var settings = merge(defaults,params);
+	var settings = merge(defaults, params);
 
-	// 
+	//
 	var handleAnim = function(anim) {
 		if (anim.animationName === "ios-overlay-show") {
 			settings.onshow();
@@ -81,7 +89,7 @@ var iosOverlay = function(params) {
 		} else {
 			document.body.appendChild(overlayDOM);
 		}
-		
+
 		settings.onbeforeshow();
 		// begin fade in
 		if (doesTransitions) {
@@ -97,7 +105,7 @@ var iosOverlay = function(params) {
 		if (settings.duration) {
 			window.setTimeout(function() {
 				hide();
-			},settings.duration);
+			}, settings.duration);
 		}
 
 	}());
@@ -108,7 +116,7 @@ var iosOverlay = function(params) {
 		// fade out
 		if (doesTransitions) {
 			// CSS animation bound to classes
-			overlayDOM.className = overlayDOM.className.replace("show","hide");
+			overlayDOM.className = overlayDOM.className.replace("show", "hide");
 		} else if (typeof $ === "function") {
 			// polyfill requires jQuery
 			$(overlayDOM).fadeOut({
@@ -149,3 +157,10 @@ var iosOverlay = function(params) {
 	};
 
 };
+
+//Added support for requirejs
+if (typeof define === 'function' && define.amd) {
+	define([], function() {
+		return iosOverlay;
+	});
+}
