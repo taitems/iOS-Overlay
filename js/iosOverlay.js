@@ -7,6 +7,7 @@ var iosOverlay = function(params) {
 
 	var overlayDOM;
 	var noop = function() {};
+	var hideTimeOut = null;
 	var defaults = {
 		onbeforeshow: noop,
 		onshow: noop,
@@ -16,6 +17,7 @@ var iosOverlay = function(params) {
 		icon: null,
 		spinner: null,
 		duration: null,
+		mouseover: null,
 		id: null,
 		parentEl: null
 	};
@@ -102,8 +104,18 @@ var iosOverlay = function(params) {
 			});
 		}
 
+		if(settings.mouseover) {
+			$(overlayDOM).mouseover( function () {
+			  clearTimeout(hideTimeOut);
+			});
+			
+			$(overlayDOM).mouseleave( function () {
+				hide();
+			});
+		}
+
 		if (settings.duration) {
-			window.setTimeout(function() {
+			hideTimeOut = window.setTimeout(function() {
 				hide();
 			}, settings.duration);
 		}
